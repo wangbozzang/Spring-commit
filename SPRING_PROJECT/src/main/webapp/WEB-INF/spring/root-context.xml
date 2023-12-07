@@ -14,7 +14,7 @@
 -->
 	<context:component-scan base-package="com.cjass.etc" />
 <!-- 	
-	<aop:config>
+	<aop:config>     
 		<aop:aspect id="aspect_myAdvice" ref="myAdvice">
 			<aop:pointcut
 				expression="execution(* com.cjass.web.member.controller.MemberController.list(..))"
