@@ -6,5 +6,7 @@ import java.util.Map;
 public interface OrderInfoMapper {
 	
 	public List<Map> selectOrderInfo();
+	
+	public int insertOrderInfo(Map map);
 
 }

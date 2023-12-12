@@ -21,4 +21,10 @@ public class OrderInfoDaoImpl implements OrderInfoDao {
 		return mapper.selectOrderInfo();
 	}
 
+	@Override
+	public int insertOrderInfo(Map map) {
+		OrderInfoMapper mapper = sqlSession.getMapper(OrderInfoMapper.class);
+		return mapper.insertOrderInfo(map);
+	}
+
 }
