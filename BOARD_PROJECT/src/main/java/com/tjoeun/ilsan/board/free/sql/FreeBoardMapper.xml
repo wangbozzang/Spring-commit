@@ -3,10 +3,36 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tjoeun.ilsan.board.free.sql.FreeBoardMapper">
+
+	<select id="select" resultType="map" parameterType="map">
+		select 
+				seq
+				,title
+				,content
+				,writer
+				,date_format(write_date,'%y.%m.%d') as write_date
+				,date_format(write_date,'%y.%m.%d %H:%i') as write_date2
+				,rec_cnt
+				,nrec_cnt
+		from free
+		where 1 = 1
+		<if test="null != seq">
+			and seq = #{seq}
+		</if>
+		order by seq desc
+	</select>
 	
 	<insert id="write" parameterType="map">
-	
-	
+		insert into free
+		(
+			title
+			,content
+			,writer
+		) values (
+			#{title}
+			,#{content}
+			,#{writer}
+		)
 	</insert>
 	
 	

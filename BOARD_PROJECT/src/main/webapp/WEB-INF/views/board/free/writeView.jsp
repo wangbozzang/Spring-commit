@@ -12,5 +12,28 @@
 		<div>
 			<h1>게시글 등록 화면</h1>
 		</div>
+		<div>
+			<form id="frm1" method="post" action="<c:url value='/board/free/write'/>">
+				<input type="text" name="title" placeholder="제목"><br>
+				<textarea name="content"></textarea><br>
+				<input type="button" id="btnWrite" value="작성"><br>
+			</form>
+		</div>
+		<script>
+			document.getElementById('btnWrite').addEventListener('click',function(){
+				document.getElementById('frm1').submit();
+			});
+		</script>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	</body>
 </html>

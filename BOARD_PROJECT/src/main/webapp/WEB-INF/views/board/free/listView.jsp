@@ -9,18 +9,34 @@
 		<title>게시판</title>
 	</head>
 	<body>
-		<h1>
-			Hello world!  
-		</h1>
-		<P>  The time on the server is ${serverTime}. </P>
 		<div>
-			<h2>자유게시판</h2>
+			<h1>자유게시판</h1>
 		</div>
 		<div>
 			<ul>
-				<li><a href="<c:url value='/board/free/listView'/>">목록</a></li>
-				<li><a href="<c:url value='/board/free/writeView'/>">글쓰기</a></li>
+				<c:forEach var="free" items="${list }">
+					<li>
+						<c:out value="${free.seq }"/> |
+						<a href="<c:url value='/board/free/detail?seq=${free.seq }'/>">
+							<c:out value="${free.title }"/>
+						</a> |
+						<c:out value="${free.writer }"/> |
+						<c:out value="${free.write_date }"/>
+					</li>
+				</c:forEach>
 			</ul>
 		</div>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	</body>
 </html>
