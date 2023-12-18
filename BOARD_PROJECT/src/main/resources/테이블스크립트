@@ -6,6 +6,8 @@ CREATE TABLE `free` (
   `write_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `rec_cnt` int NOT NULL DEFAULT '0',
   `nrec_cnt` int NOT NULL DEFAULT '0',
+  `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `del_yn` char(1) DEFAULT 'N',
   PRIMARY KEY (`seq`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3
 

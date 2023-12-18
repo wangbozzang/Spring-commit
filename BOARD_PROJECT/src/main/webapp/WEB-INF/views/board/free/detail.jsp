@@ -43,9 +43,7 @@
 			<input type="button" id="btnRepWrite" value="작성">
 		</div>
 		<div>
-			<ul>
-				<li>이번 주말 반드시 복습하겠습니다.다들 힘내세요!</li>
-			</ul>
+			<ul id="repArea"></ul>
 		</div>
 		<form id="frm1" action="<c:url value='/board/free/delete'/>" method="post">
 			<input type="hidden" id="seq" name="seq">
@@ -108,11 +106,41 @@
 					   ,content: $('#repCont').val()
 				  }
 				}).done(function( msg ) {
-					console.log(msg);
+					if ( 'success' == msg.result ) {
+						$('#repCont').val('');
+						$('#repArea').html('');
+						let repHtml = '';
+						$.each(msg.data, function(i, reply){
+							repHtml += '<li>(' + reply.write_date + ') ' + reply.content + '</li>';
+						});
+						$('#repArea').append(repHtml);
+					} else {
+						alert('서버 장애가 발생했습니다.잠시후 다시 시도해주세요.');
+					}
 				});
 			});
 			
-			
+			$(function(){
+				$.ajax({
+				  method: 'post'
+				  ,url: '<c:url value="/board/free/getRep"/>'
+				  ,data: {
+					  	f_seq: '<c:out value="${free.seq }"/>'
+				  }
+				}).done(function( msg ) {
+					if ( 'success' == msg.result ) {
+						$('#repCont').val('');
+						$('#repArea').html('');
+						let repHtml = '';
+						$.each(msg.data, function(i, reply){
+							repHtml += '<li>(' + reply.write_date + ') ' + reply.content + '</li>';
+						});
+						$('#repArea').append(repHtml);
+					} else {
+						alert('서버 장애가 발생했습니다.잠시후 다시 시도해주세요.');
+					}
+				});
+			});
 			
 			
 		</script>

@@ -19,7 +19,27 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 	FreeBoardDao freeBoardDao;
 	
 	@Override
+	public long getTotalPage(Map map) {
+		Long totalCnt = (Long)freeBoardDao.selectTotalCnt(map).get("totalCnt");
+		long page = totalCnt / 10;
+		if ( 0 < totalCnt % 10 ) {
+			page++;
+		}
+		return page;
+	}
+	
+	@Override
 	public List<Map> list(Map map) {
+		Object page = map.get("page");
+		if ( null == page || "".equals(page) ) {
+			map.put("limit", 10);
+			map.put("offset", 0);
+			map.put("page", 1);
+		} else {
+			int iPage = Integer.parseInt((String)page);
+			map.put("limit", 10 );
+			map.put("offset", 10 * (iPage - 1));
+		}
 		return freeBoardDao.select(map);
 	}
 

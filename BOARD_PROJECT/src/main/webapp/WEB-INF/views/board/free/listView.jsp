@@ -13,6 +13,10 @@
 			<h1>자유게시판</h1>
 		</div>
 		<div>
+			<input type="text" id="titleSearch" value="<c:out value="${rp.title }"/>" placeholder="제목을 입력하세요" style="width:30%">
+			<input type="button" id="btnSearch" value="조회">
+		</div>
+		<div>
 			<ul>
 				<c:forEach var="free" items="${list }">
 					<li>
@@ -26,8 +30,35 @@
 				</c:forEach>
 			</ul>
 		</div>
+		<div style="text-align: center">
+			<c:forEach var="page" begin="1" end="${totalPage }">
+				<c:if test="${page == rp.page}">
+					<span class="spanPage" data-page="${page }" style="margin:10px;font-weight: bold;">[${page }]</span>
+				</c:if>
+				<c:if test="${page != rp.page}">
+					<span class="spanPage" data-page="${page }" style="margin:10px;">[${page }]</span>
+				</c:if>
+			</c:forEach>
+		</div>
+		<form id="frm1" action="<c:url value='/board/free/listView'/>" method="post">
+			<input type="hidden" id="page" name="page">
+			<input type="hidden" id="title" name="title">
+			<input type="hidden" id="fWrite" name="fWrite">
+			<input type="hidden" id="tWrite" name="tWrite">
+		</form>
+		<script src="<c:url value='/cdn/js/jquery-3.7.1.min.js'/>"></script>
+		<script>
+			$('.spanPage').on('click', function(){
+				$('#page').val($(this).data('page'));
+				$('#title').val($('#titleSearch').val());
+				$('#frm1').submit();
+			});
 		
-		
+			$('#btnSearch').on('click', function(){
+				$('#title').val($('#titleSearch').val());
+				$('#frm1').submit();
+			});
+		</script>
 		
 		
 		
