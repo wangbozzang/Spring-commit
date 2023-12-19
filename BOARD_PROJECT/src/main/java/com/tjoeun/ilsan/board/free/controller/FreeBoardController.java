@@ -11,14 +11,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.tjoeun.ilsan.board.free.service.FreeBoardService;
+import com.tjoeun.ilsan.common.file.service.CommonFileService;
 
 @Controller
 public class FreeBoardController {
 	
 	@Autowired
 	FreeBoardService freeBoardService;
+	
+	@Autowired
+	CommonFileService commonFileService;
 	
 	@RequestMapping(value="/board/free/detail", method=RequestMethod.GET)
 	public String detail(
@@ -27,6 +32,7 @@ public class FreeBoardController {
 			) throws Exception {
 		
 		model.addAttribute("free", freeBoardService.list(map).get(0));
+		model.addAttribute("file", commonFileService.getFileList(map).get(0));
 		
 		return "board/free/detail";
 	}
@@ -54,9 +60,10 @@ public class FreeBoardController {
 	@RequestMapping(value="/board/free/write", method=RequestMethod.POST)
 	public String write(
 			@RequestParam Map map
+			,@RequestParam(value="file") MultipartFile mFile
 			) throws Exception {
 		
-		freeBoardService.write(map);
+		freeBoardService.write(map, mFile);
 		
 		return "redirect:/";
 	}
