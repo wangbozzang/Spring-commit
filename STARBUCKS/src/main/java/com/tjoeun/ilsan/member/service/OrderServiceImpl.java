@@ -43,7 +43,7 @@ public class OrderServiceImpl implements OrderService {
 		map.put("user_id", "hongkd");
 		int count = orderInfoDao.insertOrderInfo(map);
 		if ( 0 == count ) {
-			throw new Exception(); 
+			throw new Exception();
 		}
 	}
 
