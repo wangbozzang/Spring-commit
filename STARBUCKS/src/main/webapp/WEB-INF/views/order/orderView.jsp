@@ -18,7 +18,7 @@
         }
 
         .categoryGroup {
-            margin-bottom: 20px;
+            margin-bottom: 20px; 
         }
 
         .categoryBtn {
